@@ -1,0 +1,21 @@
+#!/usr/bin/env sh
+
+# Brought to you by our sponsors
+# Ailuropoda maintainers <https://git.openstack.org/cgit/openstack/ailuropoda>
+# The Collective of Conflated Wheels <http://tirefi.re/>
+
+set -x
+# stop bluetooth service
+sudo systemctl stop bluetooth.service
+# unload all bt-related kernel modules
+sudo rmmod btusb btrtl btintel btbcm bnep rfcomm bluetooth
+# reload modules
+sudo modprobe bluetooth
+sudo modprobe btrtl
+sudo modprobe btintel
+sudo modprobe btbcm
+sudo modprobe bnep
+sudo modprobe btusb
+sudo modprobe rfcomm
+# start bluetooth service
+sudo systemctl start bluetooth.service
